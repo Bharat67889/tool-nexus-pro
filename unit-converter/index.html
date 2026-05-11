@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Unit Converter - Kg to Lbs, Grams, Ounces Tool</title>
+    <meta name="description" content="Free online weight converter. Convert Kilograms (kg) to Pounds (lbs), Grams (g), and Ounces (oz) easily.">
+    <style>
+        :root { --primary: #f59e0b; --bg: #fffbeb; }
+        body { font-family: sans-serif; background: var(--bg); padding: 20px; color: #1e293b; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { color: var(--primary); text-align: center; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input, select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
+        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .res-card { background: #fef3c7; padding: 15px; border-radius: 10px; text-align: center; }
+        .res-card span { display: block; font-size: 18px; font-weight: bold; color: var(--primary); }
+        .seo-text { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; line-height: 1.6; font-size: 14px; color: #475569; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>⚖️ Weight Converter</h1>
+    <div class="input-group">
+        <label>Value Enter Karein:</label>
+        <input type="number" id="inputValue" placeholder="e.g. 1" oninput="convert()">
+    </div>
+    <div class="input-group">
+        <label>Unit Select Karein:</label>
+        <select id="inputUnit" onchange="convert()">
+            <option value="kg">Kilograms (kg)</option>
+            <option value="g">Grams (g)</option>
+            <option value="lb">Pounds (lb)</option>
+            <option value="oz">Ounces (oz)</option>
+        </select>
+    </div>
+
+    <div class="result-grid">
+        <div class="res-card">Kg <span id="kgRes">0</span></div>
+        <div class="res-card">Grams <span id="gRes">0</span></div>
+        <div class="res-card">Pounds <span id="lbRes">0</span></div>
+        <div class="res-card">Ounces <span id="ozRes">0</span></div>
+    </div>
+
+    <div class="seo-text">
+        <h2>Weight Unit Kaise Convert Karein?</h2>
+        <p>Agar aap gym jaate hain ya kitchen mein cooking kar rahe hain, toh aksar <strong>kg to lbs</strong> ya <strong>gram to kg</strong> convert karne ki zarurat padti hai. Hamara <strong>Weight Converter tool</strong> ise ekdum asaan bana deta hai.</p>
+        <p>Bas apni value dalo aur unit select karo, hamara tool turant saari units mein calculation dikha dega. <strong>Tool Nexus Pro</strong> par ye tool bina kisi ads (filhal) aur bina loading delay ke kaam karta hai.</p>
+    </div>
+</div>
+
+<script>
+    function convert() {
+        const val = parseFloat(document.getElementById('inputValue').value);
+        const unit = document.getElementById('inputUnit').value;
+        if (isNaN(val)) return;
+
+        let kg;
+        if (unit === 'kg') kg = val;
+        if (unit === 'g') kg = val / 1000;
+        if (unit === 'lb') kg = val / 2.20462;
+        if (unit === 'oz') kg = val / 35.274;
+
+        document.getElementById('kgRes').innerText = kg.toFixed(4);
+        document.getElementById('gRes').innerText = (kg * 1000).toFixed(2);
+        document.getElementById('lbRes').innerText = (kg * 2.20462).toFixed(2);
+        document.getElementById('ozRes').innerText = (kg * 35.274).toFixed(2);
+    }
+</script>
+
+</body>
+</html>
