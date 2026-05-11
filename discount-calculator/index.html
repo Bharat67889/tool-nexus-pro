@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount Calculator - Shopping Par Kitni Bachat Hui?</title>
+    <meta name="description" content="Calculate discount and sale price easily. Save money on shopping with Bharat's Tool Nexus Pro.">
+    <style>
+        :root { --primary: #e11d48; --bg: #fff1f2; }
+        body { font-family: sans-serif; background: var(--bg); padding: 20px; color: #1e293b; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { color: var(--primary); text-align: center; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; font-weight: bold; }
+        #resBox { margin-top: 25px; padding: 20px; border-radius: 12px; text-align: center; display: none; border: 2px dashed var(--primary); }
+        .seo-text { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; line-height: 1.6; font-size: 14px; color: #475569; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🏷️ Discount Calculator</h1>
+    <div class="input-group">
+        <label>Asali Keemat (Original Price ₹):</label>
+        <input type="number" id="price" placeholder="e.g. 1000">
+    </div>
+    <div class="input-group">
+        <label>Discount (%):</label>
+        <input type="number" id="discount" placeholder="e.g. 20">
+    </div>
+    <button onclick="calcDiscount()">Calculate Savings</button>
+
+    <div id="resBox">
+        <div style="font-size: 18px;">Aapki Bachat: <strong id="saveVal"></strong></div>
+        <div style="font-size: 22px; margin-top: 10px; color: var(--primary);">Final Price: <strong id="finalPrice"></strong></div>
+    </div>
+
+    <div class="seo-text">
+        <h2>Discount Kaise Nikale?</h2>
+        <p>Shopping karte waqt agar kisi product par 20% ya 30% off hai, toh uski final price nikalna mushkil ho jata hai. Hamara <strong>Discount Calculator</strong> aapko turant batata hai ki aapne kitne paise bachaye.</p>
+        <p><strong>Bachat ka Formula:</strong> Original Price ko Discount % se multiply karke 100 se divide karein. Bharat's <strong>Tool Nexus Pro</strong> par ye process auto-fast hai.</p>
+    </div>
+</div>
+
+<script>
+    function calcDiscount() {
+        const p = parseFloat(document.getElementById('price').value);
+        const d = parseFloat(document.getElementById('discount').value);
+        const box = document.getElementById('resBox');
+        if(p > 0 && d >= 0) {
+            const savings = (p * d) / 100;
+            const final = p - savings;
+            document.getElementById('saveVal').innerText = "₹" + savings.toFixed(2);
+            document.getElementById('finalPrice').innerText = "₹" + final.toFixed(2);
+            box.style.display = "block";
+        }
+    }
+</script>
+</body>
+</html>
