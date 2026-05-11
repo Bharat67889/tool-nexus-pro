@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://bharat67889.github.io/tool-nexus-pro/</loc>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bharat67889.github.io/tool-nexus-pro/age-calculator/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bharat67889.github.io/tool-nexus-pro/gst-calculator/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bharat67889.github.io/tool-nexus-pro/percentage-calculator/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bharat67889.github.io/tool-nexus-pro/unit-converter/</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>
