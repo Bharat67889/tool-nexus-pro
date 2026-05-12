@@ -2,29 +2,49 @@
 <html lang="hi">
 <head>
     <link rel="icon" type="image/png" href="favicon.png">
-<meta property="og:site_name" content="Nexus Pro Tools">
-<script type="application/ld+json">
-{ "@context": "https://schema.org", "@type": "WebSite", "name": "Nexus Pro Tools", "url": "https://bharat67889.github.io/tool-nexus-pro/" }
-</script>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <meta property="og:site_name" content="Nexus Pro Tools">
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "WebSite", "name": "Nexus Pro Tools", "url": "https://bharat67889.github.io/tool-nexus-pro/" }
+    </script>
+
     <meta charset="UTF-8">
-    <title>Age Calculator - Apna Sahi Umar Check Karein</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator - Nexus Pro Tools</title>
+    <meta name="description" content="Apni sahi umar check karein saal, mahine aur din mein. Free online Age Calculator by Nexus Pro Tools.">
+
     <style>
-        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .box { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 90%; max-width: 400px; text-align: center; }
+        :root { --primary: #2563eb; --bg: #f0f2f5; }
+        
+        /* Navigation Button Styling */
+        .nav-header { background: white; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; width: 100%; }
+        .back-btn { text-decoration: none; color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 8px; font-size: 14px; max-width: 400px; margin: auto; }
+
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        .main-content { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .box { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        
         input { width: 100%; padding: 12px; margin: 20px 0; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
-        button { background: #2563eb; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 18px; cursor: pointer; width: 100%; }
+        button { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 18px; cursor: pointer; width: 100%; transition: 0.3s; }
+        button:hover { background: #1d4ed8; }
+        
         #result { margin-top: 25px; font-size: 18px; line-height: 1.6; color: #1e293b; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h2>📅 Age Calculator</h2>
-        <p>Apni Date of Birth select karein:</p>
-        <input type="date" id="dob">
-        <button onclick="calculateAge()">Calculate Age</button>
-        <div id="result"></div>
+
+    <div class="nav-header">
+        <a href="../" class="back-btn">⬅️ Home</a>
+    </div>
+
+    <div class="main-content">
+        <div class="box">
+            <h2>📅 Age Calculator</h2>
+            <p>Apni Date of Birth select karein:</p>
+            <input type="date" id="dob">
+            <button onclick="calculateAge()">Calculate Age</button>
+            <div id="result"></div>
+        </div>
     </div>
 
     <script>
