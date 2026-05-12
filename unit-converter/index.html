@@ -1,67 +1,81 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-     <link rel="icon" type="image/png" href="favicon.png">
-<meta property="og:site_name" content="Nexus Pro Tools">
-<script type="application/ld+json">
-{ "@context": "https://schema.org", "@type": "WebSite", "name": "Nexus Pro Tools", "url": "https://bharat67889.github.io/tool-nexus-pro/" }
-</script>
-    <link rel="icon" type="image/png" href="favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weight Unit Converter - Kg to Lbs, Grams, Ounces Tool</title>
-    <meta name="description" content="Free online weight converter. Convert Kilograms (kg) to Pounds (lbs), Grams (g), and Ounces (oz) easily.">
+    <title>Weight Unit Converter - Nexus Pro Tools</title>
+    <meta name="description" content="Free online weight converter. Convert Kilograms (kg) to Pounds (lbs), Grams (g), and Ounces (oz) easily with Nexus Pro Tools.">
+
+    <!-- Magic Line: Logo, Brand Name aur Home Button sab yahan se aayega -->
+    <script src="../common/header.js"></script>
+
     <style>
         :root { --primary: #f59e0b; --bg: #fffbeb; }
-        body { font-family: sans-serif; background: var(--bg); padding: 20px; color: #1e293b; }
+        
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding: 0; color: #1e293b; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        .main-content { flex: 1; padding: 30px 20px; margin-top: 20px; }
         .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h1 { color: var(--primary); text-align: center; }
+        
+        h1 { color: var(--primary); text-align: center; margin-top: 0; }
         .input-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: bold; }
         input, select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
+        
         .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
         .res-card { background: #fef3c7; padding: 15px; border-radius: 10px; text-align: center; }
         .res-card span { display: block; font-size: 18px; font-weight: bold; color: var(--primary); }
+        
         .seo-text { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; line-height: 1.6; font-size: 14px; color: #475569; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>⚖️ Weight Converter</h1>
-    <div class="input-group">
-        <label>Value Enter Karein:</label>
-        <input type="number" id="inputValue" placeholder="e.g. 1" oninput="convert()">
-    </div>
-    <div class="input-group">
-        <label>Unit Select Karein:</label>
-        <select id="inputUnit" onchange="convert()">
-            <option value="kg">Kilograms (kg)</option>
-            <option value="g">Grams (g)</option>
-            <option value="lb">Pounds (lb)</option>
-            <option value="oz">Ounces (oz)</option>
-        </select>
-    </div>
+    <!-- Header (Home Button) ab JavaScript automatically upar daal dega -->
 
-    <div class="result-grid">
-        <div class="res-card">Kg <span id="kgRes">0</span></div>
-        <div class="res-card">Grams <span id="gRes">0</span></div>
-        <div class="res-card">Pounds <span id="lbRes">0</span></div>
-        <div class="res-card">Ounces <span id="ozRes">0</span></div>
-    </div>
+    <div class="main-content">
+        <div class="container">
+            <h1>⚖️ Weight Converter</h1>
+            <div class="input-group">
+                <label>Value Enter Karein:</label>
+                <input type="number" id="inputValue" placeholder="e.g. 1" oninput="convert()">
+            </div>
+            <div class="input-group">
+                <label>Unit Select Karein:</label>
+                <select id="inputUnit" onchange="convert()">
+                    <option value="kg">Kilograms (kg)</option>
+                    <option value="g">Grams (g)</option>
+                    <option value="lb">Pounds (lb)</option>
+                    <option value="oz">Ounces (oz)</option>
+                </select>
+            </div>
 
-    <div class="seo-text">
-        <h2>Weight Unit Kaise Convert Karein?</h2>
-        <p>Agar aap gym jaate hain ya kitchen mein cooking kar rahe hain, toh aksar <strong>kg to lbs</strong> ya <strong>gram to kg</strong> convert karne ki zarurat padti hai. Hamara <strong>Weight Converter tool</strong> ise ekdum asaan bana deta hai.</p>
-        <p>Bas apni value dalo aur unit select karo, hamara tool turant saari units mein calculation dikha dega. <strong>Tool Nexus Pro</strong> par ye tool bina kisi ads (filhal) aur bina loading delay ke kaam karta hai.</p>
+            <div class="result-grid">
+                <div class="res-card">Kg <span id="kgRes">0</span></div>
+                <div class="res-card">Grams <span id="gRes">0</span></div>
+                <div class="res-card">Pounds <span id="lbRes">0</span></div>
+                <div class="res-card">Ounces <span id="ozRes">0</span></div>
+            </div>
+
+            <div class="seo-text">
+                <h2>Weight Unit Kaise Convert Karein?</h2>
+                <p>Agar aap gym jaate hain ya kitchen mein cooking kar rahe hain, toh aksar <strong>kg to lbs</strong> ya <strong>gram to kg</strong> convert karne ki zarurat padti hai. Hamara <strong>Weight Converter tool</strong> ise ekdum asaan bana deta hai.</p>
+                <p>Bas apni value dalo aur unit select karo, hamara tool turant saari units mein calculation dikha dega. <strong>Nexus Pro Tools</strong> par ye tool bina kisi ads aur bina loading delay ke kaam karta hai.</p>
+            </div>
+        </div>
     </div>
-</div>
 
 <script>
     function convert() {
         const val = parseFloat(document.getElementById('inputValue').value);
         const unit = document.getElementById('inputUnit').value;
-        if (isNaN(val)) return;
+        if (isNaN(val)) {
+            document.getElementById('kgRes').innerText = "0";
+            document.getElementById('gRes').innerText = "0";
+            document.getElementById('lbRes').innerText = "0";
+            document.getElementById('ozRes').innerText = "0";
+            return;
+        }
 
         let kg;
         if (unit === 'kg') kg = val;
