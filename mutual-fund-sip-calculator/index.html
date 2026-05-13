@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO -->
-    <title>Mutual Fund SIP Calculator Online</title>
+    <title>Mutual Fund SIP Calculator Online | Nexus Pro Tools</title>
+    <meta name="description" content="Free Mutual Fund SIP Calculator to calculate monthly investment returns, future value and wealth gain instantly.">
+    <meta name="keywords" content="mutual fund sip calculator, sip calculator online, investment calculator, sip return calculator">
 
-    <meta name="description"
-        content="Free Mutual Fund SIP Calculator to calculate monthly investment returns, future value and wealth gain instantly.">
-
-    <meta name="keywords"
-        content="mutual fund sip calculator, sip calculator online, investment calculator, sip return calculator">
-
-    <!-- Common Header File -->
-    <script src="../common/header.js"></script>
+    <link rel="icon" type="image/png" href="../favicon.png">
 
     <style>
-
         :root{
             --primary:#2563eb;
             --primary-dark:#1d4ed8;
@@ -29,9 +21,7 @@
             --success:#16a34a;
         }
 
-        *{
-            box-sizing:border-box;
-        }
+        *{ box-sizing:border-box; }
 
         body{
             margin:0;
@@ -40,11 +30,18 @@
             color:var(--text);
         }
 
+        /* Navigation Header */
+        .nav-home { background: white; padding: 15px; border-bottom: 1px solid #e2e8f0; }
+        .nav-home a { text-decoration: none; color: var(--primary); font-weight: bold; font-size: 16px; }
+
         .container{
             max-width:950px;
             margin:auto;
             padding:25px;
         }
+
+        /* Ad Styling */
+        .ad-slot { text-align: center; margin: 20px 0; overflow: hidden; }
 
         .calculator-card{
             background:var(--card);
@@ -52,347 +49,151 @@
             border-radius:24px;
             box-shadow:0 10px 30px rgba(0,0,0,0.08);
             border:1px solid #e2e8f0;
-            margin-top:30px;
+            margin-top:10px;
         }
 
-        h1{
-            text-align:center;
-            color:var(--primary);
-            margin-bottom:10px;
-            font-size:34px;
-        }
+        h1{ text-align:center; color:var(--primary); margin-bottom:10px; font-size:34px; }
+        .subtitle{ text-align:center; color:var(--muted); margin-bottom:35px; font-size:16px; }
 
-        .subtitle{
-            text-align:center;
-            color:var(--muted);
-            margin-bottom:35px;
-            font-size:16px;
-        }
+        .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px; }
+        .field label{ display:block; margin-bottom:8px; font-weight:600; color:#334155; }
+        .field input{ width:100%; padding:14px; border-radius:12px; border:2px solid #cbd5e1; font-size:16px; transition:0.3s; }
+        .field input:focus{ border-color:var(--primary); outline:none; }
 
-        .grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-            gap:22px;
-        }
+        .btn{ width:100%; margin-top:30px; padding:16px; border:none; border-radius:14px; background:var(--primary); color:white; font-size:18px; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .btn:hover{ background:var(--primary-dark); transform:translateY(-2px); }
 
-        .field label{
-            display:block;
-            margin-bottom:8px;
-            font-weight:600;
-            color:#334155;
-        }
+        #result{ display:none; margin-top:35px; }
+        .result-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:18px; }
+        .result-box{ background:#eff6ff; padding:25px; border-radius:18px; text-align:center; border:1px solid #bfdbfe; }
+        .result-box span{ display:block; color:var(--muted); font-size:14px; margin-bottom:10px; }
+        .result-box strong{ font-size:24px; color:var(--primary); }
 
-        .field input{
-            width:100%;
-            padding:14px;
-            border-radius:12px;
-            border:2px solid #cbd5e1;
-            font-size:16px;
-            transition:0.3s;
-        }
+        .content{ margin-top:50px; background:white; border-radius:24px; padding:40px; line-height:1.8; box-shadow:0 5px 20px rgba(0,0,0,0.05); }
+        .content h2{ color:var(--primary); margin-top:35px; border-left:5px solid var(--primary); padding-left:14px; }
+        .highlight{ background:#f8fafc; border-left:5px solid var(--success); padding:20px; border-radius:10px; margin:25px 0; }
+        .formula{ background:#e2e8f0; padding:18px; border-radius:12px; text-align:center; font-weight:bold; overflow:auto; }
 
-        .field input:focus{
-            border-color:var(--primary);
-            outline:none;
-        }
-
-        .btn{
-            width:100%;
-            margin-top:30px;
-            padding:16px;
-            border:none;
-            border-radius:14px;
-            background:var(--primary);
-            color:white;
-            font-size:18px;
-            font-weight:bold;
-            cursor:pointer;
-            transition:0.3s;
-        }
-
-        .btn:hover{
-            background:var(--primary-dark);
-            transform:translateY(-2px);
-        }
-
-        #result{
-            display:none;
-            margin-top:35px;
-        }
-
-        .result-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-            gap:18px;
-        }
-
-        .result-box{
-            background:#eff6ff;
-            padding:25px;
-            border-radius:18px;
-            text-align:center;
-            border:1px solid #bfdbfe;
-        }
-
-        .result-box span{
-            display:block;
-            color:var(--muted);
-            font-size:14px;
-            margin-bottom:10px;
-        }
-
-        .result-box strong{
-            font-size:24px;
-            color:var(--primary);
-        }
-
-        .content{
-            margin-top:50px;
-            background:white;
-            border-radius:24px;
-            padding:40px;
-            line-height:1.8;
-            box-shadow:0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        .content h2{
-            color:var(--primary);
-            margin-top:35px;
-            border-left:5px solid var(--primary);
-            padding-left:14px;
-        }
-
-        .highlight{
-            background:#f8fafc;
-            border-left:5px solid var(--success);
-            padding:20px;
-            border-radius:10px;
-            margin:25px 0;
-        }
-
-        .formula{
-            background:#e2e8f0;
-            padding:18px;
-            border-radius:12px;
-            text-align:center;
-            font-weight:bold;
-            overflow:auto;
-        }
-
-        ul{
-            padding-left:20px;
-        }
-
-        li{
-            margin-bottom:10px;
-        }
+        ul{ padding-left:20px; }
+        li{ margin-bottom:10px; }
 
         @media(max-width:600px){
-
-            .calculator-card,
-            .content{
-                padding:22px;
-            }
-
-            h1{
-                font-size:28px;
-            }
-
+            .calculator-card, .content{ padding:22px; }
+            h1{ font-size:28px; }
         }
-
     </style>
-
 </head>
 
 <body>
 
+<div class="nav-home">
+    <div class="container" style="padding:0;">
+        <a href="../">🏠 Home</a>
+    </div>
+</div>
+
 <div class="container">
 
+    <div class="ad-slot">
+        <script>
+            atOptions = { 'key' : '184382ec0de2bd6a91aa9498307622e3', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+        </script>
+        <script src="https://www.highperformanceformat.com/184382ec0de2bd6a91aa9498307622e3/invoke.js"></script>
+    </div>
+
     <div class="calculator-card">
-
         <h1>📈 Mutual Fund SIP Calculator</h1>
-
-        <p class="subtitle">
-            Calculate your SIP investment returns instantly
-        </p>
+        <p class="subtitle">Calculate your SIP investment returns instantly</p>
 
         <div class="grid">
-
             <div class="field">
                 <label>Monthly Investment (₹)</label>
                 <input type="number" id="monthly" placeholder="e.g. 5000">
             </div>
-
             <div class="field">
                 <label>Expected Return Rate (% yearly)</label>
                 <input type="number" id="rate" step="0.1" placeholder="e.g. 12">
             </div>
-
             <div class="field">
                 <label>Investment Duration (Years)</label>
                 <input type="number" id="years" placeholder="e.g. 15">
             </div>
-
         </div>
 
-        <button class="btn" onclick="calculateSIP()">
-            Calculate SIP Returns
-        </button>
+        <button class="btn" onclick="calculateSIP()">Calculate SIP Returns</button>
+
+        <div class="ad-slot">
+            <script>
+                atOptions = { 'key' : '4aa4f66ab47e8b4550d931a5fbdae3d8', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+            </script>
+            <script src="https://www.highperformanceformat.com/4aa4f66ab47e8b4550d931a5fbdae3d8/invoke.js"></script>
+        </div>
 
         <div id="result">
-
             <div class="result-grid">
-
-                <div class="result-box">
-                    <span>Total Investment</span>
-                    <strong id="invested">₹0</strong>
-                </div>
-
-                <div class="result-box">
-                    <span>Estimated Returns</span>
-                    <strong id="returns">₹0</strong>
-                </div>
-
-                <div class="result-box">
-                    <span>Total Future Value</span>
-                    <strong id="futureValue">₹0</strong>
-                </div>
-
+                <div class="result-box"><span>Total Investment</span><strong id="invested">₹0</strong></div>
+                <div class="result-box"><span>Estimated Returns</span><strong id="returns">₹0</strong></div>
+                <div class="result-box"><span>Total Future Value</span><strong id="futureValue">₹0</strong></div>
             </div>
-
         </div>
-
     </div>
 
     <div class="content">
-
         <h2>What is a SIP Calculator?</h2>
-
-        <p>
-            A SIP Calculator helps investors estimate the future value of their mutual fund investments. SIP means Systematic Investment Plan, where you invest a fixed amount every month.
-        </p>
+        <p>A SIP Calculator helps investors estimate the future value of their mutual fund investments. SIP means Systematic Investment Plan, where you invest a fixed amount every month.</p>
 
         <div class="highlight">
             “Long-term SIP investing combined with compounding can build significant wealth over time.”
         </div>
 
-        <h2>How SIP Works?</h2>
-
-        <p>
-            In SIP investing, you contribute a fixed amount monthly into mutual funds. Your money grows through compound returns over years.
-        </p>
-
-        <h2>SIP Formula</h2>
-
-        <div class="formula">
-            M = P × [ ( (1 + i)^n - 1 ) / i ] × (1+i)
+        <div class="ad-slot">
+            <script async="async" data-cfasync="false" src="https://pl29437607.profitablecpmratenetwork.com/959ac07eecd45893628a61f1674b5df1/invoke.js"></script>
+            <div id="container-959ac07eecd45893628a61f1674b5df1"></div>
         </div>
 
-        <p>
-            Here:
-        </p>
+        <h2>How SIP Works?</h2>
+        <p>In SIP investing, you contribute a fixed amount monthly into mutual funds. Your money grows through compound returns over years.</p>
 
-        <ul>
-            <li><strong>P</strong> = Monthly Investment</li>
-            <li><strong>i</strong> = Monthly Interest Rate</li>
-            <li><strong>n</strong> = Total Number of Months</li>
-        </ul>
+        <h2>SIP Formula</h2>
+        <div class="formula">M = P × [ ( (1 + i)^n - 1 ) / i ] × (1+i)</div>
 
         <h2>Benefits of SIP Investment</h2>
-
         <ul>
             <li>Disciplined investing habit</li>
             <li>Power of compounding</li>
             <li>Lower market timing risk</li>
             <li>Affordable monthly investing</li>
-            <li>Long-term wealth creation</li>
         </ul>
-
-        <h2>Why Use Our SIP Calculator?</h2>
-
-        <p>
-            Nexus Pro Tools provides a fast, simple and mobile-friendly SIP calculator for free. Instantly calculate your future wealth and investment growth without any signup.
-        </p>
-
-        <h2>Frequently Asked Questions</h2>
-
-        <p>
-            <strong>Can SIP make me rich?</strong><br>
-            Long-term disciplined SIP investing can create substantial wealth through compounding.
-        </p>
-
-        <p>
-            <strong>Is SIP better than FD?</strong><br>
-            SIP generally offers higher long-term return potential compared to fixed deposits, but market risks exist.
-        </p>
-
-        <p>
-            <strong>Can I increase SIP later?</strong><br>
-            Yes, many mutual funds allow SIP top-up options.
-        </p>
-
     </div>
-
 </div>
 
+<script src="https://pl29437608.profitablecpmratenetwork.com/c1/f2/d2/c1f2d297c6f51b4871dab1a16757ba1d.js"></script>
+
 <script>
-
 function calculateSIP(){
-
-    const monthly =
-        parseFloat(document.getElementById("monthly").value);
-
-    const annualRate =
-        parseFloat(document.getElementById("rate").value);
-
-    const years =
-        parseFloat(document.getElementById("years").value);
+    const monthly = parseFloat(document.getElementById("monthly").value);
+    const annualRate = parseFloat(document.getElementById("rate").value);
+    const years = parseFloat(document.getElementById("years").value);
 
     if(!monthly || !annualRate || !years){
-
-        alert("Please fill all fields properly.");
+        alert("Bhai, saari details sahi se bharo!");
         return;
     }
 
-    const monthlyRate =
-        annualRate / 12 / 100;
+    const monthlyRate = annualRate / 12 / 100;
+    const months = years * 12;
 
-    const months =
-        years * 12;
+    const futureValue = monthly * (((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate)) * (1 + monthlyRate);
+    const invested = monthly * months;
+    const returns = futureValue - invested;
 
-    const futureValue =
-        monthly *
-        (
-            (
-                Math.pow(1 + monthlyRate, months) - 1
-            ) / monthlyRate
-        ) *
-        (1 + monthlyRate);
-
-    const invested =
-        monthly * months;
-
-    const returns =
-        futureValue - invested;
-
-    document.getElementById("invested").innerText =
-        "₹" + Math.round(invested).toLocaleString('en-IN');
-
-    document.getElementById("returns").innerText =
-        "₹" + Math.round(returns).toLocaleString('en-IN');
-
-    document.getElementById("futureValue").innerText =
-        "₹" + Math.round(futureValue).toLocaleString('en-IN');
+    document.getElementById("invested").innerText = "₹" + Math.round(invested).toLocaleString('en-IN');
+    document.getElementById("returns").innerText = "₹" + Math.round(returns).toLocaleString('en-IN');
+    document.getElementById("futureValue").innerText = "₹" + Math.round(futureValue).toLocaleString('en-IN');
 
     document.getElementById("result").style.display = "block";
-
-    window.scrollTo({
-        top: document.getElementById("result").offsetTop - 100,
-        behavior: 'smooth'
-    });
-
+    window.scrollTo({ top: document.getElementById("result").offsetTop - 100, behavior: 'smooth' });
 }
-
 </script>
 
 </body>
