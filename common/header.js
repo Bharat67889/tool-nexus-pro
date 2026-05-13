@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // 1. Site Name aur Brand Identity setup
-    const brandName = "Nexus Pro Tools";
+    const brandName = "Texus Pro Tools";
     const homeLink = "../";
 
     // 2. Favicon add karna
