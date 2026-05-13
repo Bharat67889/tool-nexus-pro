@@ -1,0 +1,515 @@
+<!-- FILE/FOLDER NAME:
+bike-loan-emi-calculator
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bike EMI Calculator Online</title>
+
+<meta name="description"
+content="Free Bike EMI Calculator Online. Calculate motorcycle loan EMI, down payment, monthly installment, total interest and two wheeler finance cost instantly.">
+
+<meta name="keywords"
+content="bike emi calculator, motorcycle loan calculator, scooty emi calculator, two wheeler loan emi, bike finance calculator, monthly bike payment calculator">
+
+<script src="../common/header.js"></script>
+
+<style>
+
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#64748b;
+    --success:#16a34a;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Segoe UI,Tahoma,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:25px;
+}
+
+.calculator-card{
+    background:var(--card);
+    border-radius:24px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    border:1px solid #e2e8f0;
+    margin-top:30px;
+}
+
+h1{
+    text-align:center;
+    color:var(--primary);
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:var(--muted);
+    margin-bottom:35px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#334155;
+}
+
+.field input,
+.field select{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:2px solid #cbd5e1;
+    font-size:16px;
+    transition:0.3s;
+    background:white;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:var(--primary);
+    outline:none;
+}
+
+.btn{
+    width:100%;
+    margin-top:30px;
+    padding:16px;
+    border:none;
+    border-radius:14px;
+    background:var(--primary);
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:var(--primary-dark);
+    transform:translateY(-2px);
+}
+
+#result{
+    display:none;
+    margin-top:40px;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+}
+
+.result-box{
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
+}
+
+.result-box span{
+    display:block;
+    font-size:14px;
+    color:var(--muted);
+    margin-bottom:10px;
+}
+
+.result-box strong{
+    font-size:24px;
+    color:var(--primary);
+}
+
+.breakdown{
+    margin-top:30px;
+    background:#f8fafc;
+    padding:25px;
+    border-radius:18px;
+    border:1px solid #e2e8f0;
+}
+
+.breakdown-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.breakdown-row:last-child{
+    border-bottom:none;
+}
+
+.content{
+    margin-top:50px;
+    background:white;
+    border-radius:24px;
+    padding:40px;
+    line-height:1.8;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.content h2{
+    color:var(--primary);
+    border-left:5px solid var(--primary);
+    padding-left:14px;
+    margin-top:35px;
+}
+
+.highlight{
+    background:#f8fafc;
+    border-left:5px solid var(--success);
+    padding:20px;
+    border-radius:10px;
+    margin:25px 0;
+}
+
+ul{
+    padding-left:20px;
+}
+
+li{
+    margin-bottom:10px;
+}
+
+.toggle-wrap{
+    margin-top:10px;
+}
+
+@media(max-width:600px){
+
+    .calculator-card,
+    .content{
+        padding:22px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="calculator-card">
+
+<h1>🏍️ Bike EMI Calculator</h1>
+
+<p class="subtitle">
+Calculate your bike loan EMI, total interest and two wheeler finance cost instantly
+</p>
+
+<div class="grid">
+
+<div class="field">
+<label>Bike Price (₹)</label>
+<input type="number" id="bikePrice" placeholder="e.g. 150000">
+</div>
+
+<div class="field">
+<label>Down Payment (₹)</label>
+<input type="number" id="downPayment" placeholder="e.g. 30000">
+</div>
+
+<div class="field">
+<label>Interest Rate (% yearly)</label>
+<input type="number" id="interestRate" step="0.1" placeholder="e.g. 10">
+</div>
+
+<div class="field">
+<label>Loan Duration</label>
+
+<input type="number" id="loanDuration" placeholder="e.g. 24">
+
+<div class="toggle-wrap">
+<select id="durationType">
+<option value="months">Months</option>
+<option value="years">Years</option>
+</select>
+</div>
+
+</div>
+
+<div class="field">
+<label>Processing Fee (₹)</label>
+<input type="number" id="processingFee" placeholder="e.g. 2500">
+</div>
+
+<div class="field">
+<label>Insurance Cost (₹)</label>
+<input type="number" id="insuranceCost" placeholder="e.g. 12000">
+</div>
+
+</div>
+
+<button class="btn" onclick="calculateBikeEMI()">
+Calculate Bike EMI
+</button>
+
+<div id="result">
+
+<div class="result-grid">
+
+<div class="result-box">
+<span>Monthly EMI</span>
+<strong id="monthlyEMI">₹0</strong>
+</div>
+
+<div class="result-box">
+<span>Total Interest</span>
+<strong id="totalInterest">₹0</strong>
+</div>
+
+<div class="result-box">
+<span>Total Payable</span>
+<strong id="totalPayable">₹0</strong>
+</div>
+
+<div class="result-box">
+<span>Loan Amount</span>
+<strong id="loanAmount">₹0</strong>
+</div>
+
+</div>
+
+<div class="breakdown">
+
+<div class="breakdown-row">
+<span>Bike Price</span>
+<strong id="bBikePrice">₹0</strong>
+</div>
+
+<div class="breakdown-row">
+<span>Down Payment</span>
+<strong id="bDownPayment">₹0</strong>
+</div>
+
+<div class="breakdown-row">
+<span>Insurance Cost</span>
+<strong id="bInsurance">₹0</strong>
+</div>
+
+<div class="breakdown-row">
+<span>Processing Fee</span>
+<strong id="bProcessing">₹0</strong>
+</div>
+
+<div class="breakdown-row">
+<span>Total Loan Cost</span>
+<strong id="bTotalLoan">₹0</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="content">
+
+<h2>What is a Bike EMI Calculator?</h2>
+
+<p>
+A Bike EMI Calculator helps you estimate the monthly installment for your motorcycle or scooty loan. Whether you are planning to buy a sports bike, commuter bike or scooter, this tool instantly calculates EMI, interest and total payable amount.
+</p>
+
+<div class="highlight">
+“Planning your two wheeler EMI before purchasing helps you avoid financial pressure later.”
+</div>
+
+<h2>Monthly or Yearly Loan Duration</h2>
+
+<p>
+Unlike many simple EMI calculators, this bike finance tool supports both monthly and yearly loan duration input. This means you can directly enter loan tenure in months or years according to your finance plan.
+</p>
+
+<h2>Why Use This Bike Loan Calculator?</h2>
+
+<ul>
+<li>Instant EMI calculation</li>
+<li>Supports months and years toggle</li>
+<li>Works for scooters and motorcycles</li>
+<li>Mobile friendly interface</li>
+<li>Fast and accurate results</li>
+</ul>
+
+<h2>What Factors Affect Bike EMI?</h2>
+
+<ul>
+<li>Bike price</li>
+<li>Down payment amount</li>
+<li>Interest rate</li>
+<li>Loan tenure</li>
+<li>Insurance and processing fees</li>
+</ul>
+
+<h2>How to Reduce Bike EMI?</h2>
+
+<p>
+You can reduce your bike EMI by increasing the down payment, selecting shorter loan tenure or negotiating lower interest rates with the bank or finance company.
+</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<p>
+<strong>Can I calculate scooter EMI also?</strong><br>
+Yes, this calculator works for scooters, bikes and motorcycles.
+</p>
+
+<p>
+<strong>Can I enter loan duration in months?</strong><br>
+Yes, this tool supports both months and years.
+</p>
+
+<p>
+<strong>Does longer tenure reduce EMI?</strong><br>
+Yes, but it increases total interest paid over time.
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function formatCurrency(value){
+
+    return "₹" + Math.round(value).toLocaleString('en-IN');
+
+}
+
+function calculateBikeEMI(){
+
+    const bikePrice =
+        parseFloat(document.getElementById("bikePrice").value);
+
+    const downPayment =
+        parseFloat(document.getElementById("downPayment").value) || 0;
+
+    const interestRate =
+        parseFloat(document.getElementById("interestRate").value);
+
+    const loanDuration =
+        parseFloat(document.getElementById("loanDuration").value);
+
+    const durationType =
+        document.getElementById("durationType").value;
+
+    const processingFee =
+        parseFloat(document.getElementById("processingFee").value) || 0;
+
+    const insuranceCost =
+        parseFloat(document.getElementById("insuranceCost").value) || 0;
+
+    if(!bikePrice || !interestRate || !loanDuration){
+
+        alert("Please fill all required fields.");
+        return;
+    }
+
+    let months;
+
+    if(durationType === "years"){
+
+        months = loanDuration * 12;
+
+    }else{
+
+        months = loanDuration;
+
+    }
+
+    const principal =
+        bikePrice - downPayment;
+
+    const monthlyRate =
+        interestRate / 12 / 100;
+
+    const emi =
+        (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+        (Math.pow(1 + monthlyRate, months) - 1);
+
+    const totalPayable =
+        emi * months;
+
+    const totalInterest =
+        totalPayable - principal;
+
+    const totalLoanCost =
+        totalPayable + processingFee + insuranceCost;
+
+    document.getElementById("monthlyEMI").innerText =
+        formatCurrency(emi);
+
+    document.getElementById("totalInterest").innerText =
+        formatCurrency(totalInterest);
+
+    document.getElementById("totalPayable").innerText =
+        formatCurrency(totalLoanCost);
+
+    document.getElementById("loanAmount").innerText =
+        formatCurrency(principal);
+
+    document.getElementById("bBikePrice").innerText =
+        formatCurrency(bikePrice);
+
+    document.getElementById("bDownPayment").innerText =
+        formatCurrency(downPayment);
+
+    document.getElementById("bInsurance").innerText =
+        formatCurrency(insuranceCost);
+
+    document.getElementById("bProcessing").innerText =
+        formatCurrency(processingFee);
+
+    document.getElementById("bTotalLoan").innerText =
+        formatCurrency(totalLoanCost);
+
+    document.getElementById("result").style.display = "block";
+
+    window.scrollTo({
+        top: document.getElementById("result").offsetTop - 100,
+        behavior:"smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
