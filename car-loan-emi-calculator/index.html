@@ -1,0 +1,499 @@
+<!-- FILE/FOLDER NAME:
+car-loan-emi-calculator
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Car Loan EMI Calculator Online</title>
+
+<meta name="description"
+content="Free Car Loan EMI Calculator Online. Calculate monthly EMI, down payment, total interest, loan amount, car finance cost and vehicle loan repayment instantly.">
+
+<meta name="keywords"
+content="car loan emi calculator, car finance calculator, auto loan calculator, vehicle emi calculator, monthly car payment calculator, used car loan calculator, new car emi calculator">
+
+<script src="../common/header.js"></script>
+
+<style>
+
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#64748b;
+    --success:#16a34a;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Segoe UI,Tahoma,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:25px;
+}
+
+.calculator-card{
+    background:var(--card);
+    border-radius:24px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    border:1px solid #e2e8f0;
+    margin-top:30px;
+}
+
+h1{
+    text-align:center;
+    color:var(--primary);
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:var(--muted);
+    margin-bottom:35px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#334155;
+}
+
+.field input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:2px solid #cbd5e1;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.field input:focus{
+    border-color:var(--primary);
+    outline:none;
+}
+
+.btn{
+    width:100%;
+    margin-top:30px;
+    padding:16px;
+    border:none;
+    border-radius:14px;
+    background:var(--primary);
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:var(--primary-dark);
+    transform:translateY(-2px);
+}
+
+#result{
+    display:none;
+    margin-top:40px;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+}
+
+.result-box{
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
+}
+
+.result-box span{
+    display:block;
+    font-size:14px;
+    color:var(--muted);
+    margin-bottom:10px;
+}
+
+.result-box strong{
+    font-size:24px;
+    color:var(--primary);
+}
+
+.breakdown{
+    margin-top:30px;
+    background:#f8fafc;
+    padding:25px;
+    border-radius:18px;
+    border:1px solid #e2e8f0;
+}
+
+.breakdown-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.breakdown-row:last-child{
+    border-bottom:none;
+}
+
+.content{
+    margin-top:50px;
+    background:white;
+    border-radius:24px;
+    padding:40px;
+    line-height:1.8;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.content h2{
+    color:var(--primary);
+    border-left:5px solid var(--primary);
+    padding-left:14px;
+    margin-top:35px;
+}
+
+.highlight{
+    background:#f8fafc;
+    border-left:5px solid var(--success);
+    padding:20px;
+    border-radius:10px;
+    margin:25px 0;
+}
+
+ul{
+    padding-left:20px;
+}
+
+li{
+    margin-bottom:10px;
+}
+
+@media(max-width:600px){
+
+    .calculator-card,
+    .content{
+        padding:22px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="calculator-card">
+
+<h1>🚗 Car Loan EMI Calculator</h1>
+
+<p class="subtitle">
+Calculate your monthly car EMI, total interest and vehicle finance cost instantly
+</p>
+
+<div class="grid">
+
+<div class="field">
+<label>Car Price (₹)</label>
+<input type="number" id="carPrice" placeholder="e.g. 800000">
+</div>
+
+<div class="field">
+<label>Down Payment (₹)</label>
+<input type="number" id="downPayment" placeholder="e.g. 100000">
+</div>
+
+<div class="field">
+<label>Interest Rate (% yearly)</label>
+<input type="number" id="interestRate" step="0.1" placeholder="e.g. 9">
+</div>
+
+<div class="field">
+<label>Loan Tenure (Years)</label>
+<input type="number" id="loanYears" placeholder="e.g. 5">
+</div>
+
+<div class="field">
+<label>Processing Fee (₹)</label>
+<input type="number" id="processingFee" placeholder="e.g. 5000">
+</div>
+
+<div class="field">
+<label>Insurance Cost (₹)</label>
+<input type="number" id="insuranceCost" placeholder="e.g. 30000">
+</div>
+
+</div>
+
+<button class="btn" onclick="calculateEMI()">
+Calculate Car EMI
+</button>
+
+<div id="result">
+
+<div class="result-grid">
+
+<div class="result-box">
+<span>Monthly EMI</span>
+<strong id="monthlyEMI">₹0</strong>
+</div>
+
+<div class="result-box">
+<span>Total Interest</span>
+<strong id="totalInterest">₹0</strong>
+</div>
+
+<div class="result-box">
+<span>Total Payable</span>
+<strong id="totalPayable">₹0</strong>
+</div>
+
+<div class="result-box">
+<span>Loan Amount</span>
+<strong id="loanAmount">₹0</strong>
+</div>
+
+</div>
+
+<div class="breakdown">
+
+<div class="breakdown-row">
+<span>Car Price</span>
+<strong id="bCarPrice">₹0</strong>
+</div>
+
+<div class="breakdown-row">
+<span>Down Payment</span>
+<strong id="bDownPayment">₹0</strong>
+</div>
+
+<div class="breakdown-row">
+<span>Insurance Cost</span>
+<strong id="bInsurance">₹0</strong>
+</div>
+
+<div class="breakdown-row">
+<span>Processing Fee</span>
+<strong id="bProcessing">₹0</strong>
+</div>
+
+<div class="breakdown-row">
+<span>Total Loan Cost</span>
+<strong id="bTotalLoan">₹0</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="content">
+
+<h2>What is a Car Loan EMI Calculator?</h2>
+
+<p>
+A Car Loan EMI Calculator helps you estimate your monthly car loan payment before purchasing a vehicle. Whether you are buying a new car or a used car, this tool gives you an instant estimate of your EMI, total repayment amount and interest cost.
+</p>
+
+<div class="highlight">
+“Smart car buyers always calculate EMI before taking a vehicle loan to avoid financial stress later.”
+</div>
+
+<h2>Why EMI Planning is Important?</h2>
+
+<p>
+Many people focus only on the car price but ignore the long-term loan burden. A proper EMI calculation helps you understand how much money you will actually pay over the full loan tenure.
+</p>
+
+<p>
+This car finance calculator allows you to estimate:
+</p>
+
+<ul>
+<li>Monthly EMI amount</li>
+<li>Total interest payable</li>
+<li>Down payment impact</li>
+<li>Loan affordability</li>
+<li>Total car ownership cost</li>
+</ul>
+
+<h2>How Car EMI is Calculated?</h2>
+
+<p>
+The EMI calculation is based on loan amount, interest rate and repayment tenure. Longer tenure reduces monthly EMI but increases total interest paid to the bank.
+</p>
+
+<h2>Benefits of Using This Vehicle Loan Calculator</h2>
+
+<ul>
+<li>Instant EMI calculation</li>
+<li>Mobile friendly design</li>
+<li>Fast and accurate results</li>
+<li>Easy comparison of loan options</li>
+<li>Perfect for new and used car buyers</li>
+</ul>
+
+<h2>Things to Check Before Taking a Car Loan</h2>
+
+<ul>
+<li>Interest rate offered by bank</li>
+<li>Hidden processing charges</li>
+<li>Loan prepayment rules</li>
+<li>Insurance costs</li>
+<li>Down payment percentage</li>
+</ul>
+
+<h2>Frequently Asked Questions</h2>
+
+<p>
+<strong>Can I reduce my car EMI?</strong><br>
+Yes, increasing down payment or choosing lower interest rate can reduce EMI.
+</p>
+
+<p>
+<strong>Is longer loan tenure better?</strong><br>
+Longer tenure reduces EMI but increases overall interest cost.
+</p>
+
+<p>
+<strong>Can this calculator work for used cars?</strong><br>
+Yes, you can use this tool for both new and used car loan calculations.
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function formatCurrency(value){
+
+    return "₹" + Math.round(value).toLocaleString('en-IN');
+
+}
+
+function calculateEMI(){
+
+    const carPrice =
+        parseFloat(document.getElementById("carPrice").value);
+
+    const downPayment =
+        parseFloat(document.getElementById("downPayment").value) || 0;
+
+    const interestRate =
+        parseFloat(document.getElementById("interestRate").value);
+
+    const loanYears =
+        parseFloat(document.getElementById("loanYears").value);
+
+    const processingFee =
+        parseFloat(document.getElementById("processingFee").value) || 0;
+
+    const insuranceCost =
+        parseFloat(document.getElementById("insuranceCost").value) || 0;
+
+    if(!carPrice || !interestRate || !loanYears){
+
+        alert("Please fill all required fields.");
+        return;
+    }
+
+    const principal =
+        carPrice - downPayment;
+
+    const monthlyRate =
+        interestRate / 12 / 100;
+
+    const months =
+        loanYears * 12;
+
+    const emi =
+        (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+        (Math.pow(1 + monthlyRate, months) - 1);
+
+    const totalPayable =
+        emi * months;
+
+    const totalInterest =
+        totalPayable - principal;
+
+    const totalLoanCost =
+        totalPayable + processingFee + insuranceCost;
+
+    document.getElementById("monthlyEMI").innerText =
+        formatCurrency(emi);
+
+    document.getElementById("totalInterest").innerText =
+        formatCurrency(totalInterest);
+
+    document.getElementById("totalPayable").innerText =
+        formatCurrency(totalLoanCost);
+
+    document.getElementById("loanAmount").innerText =
+        formatCurrency(principal);
+
+    document.getElementById("bCarPrice").innerText =
+        formatCurrency(carPrice);
+
+    document.getElementById("bDownPayment").innerText =
+        formatCurrency(downPayment);
+
+    document.getElementById("bInsurance").innerText =
+        formatCurrency(insuranceCost);
+
+    document.getElementById("bProcessing").innerText =
+        formatCurrency(processingFee);
+
+    document.getElementById("bTotalLoan").innerText =
+        formatCurrency(totalLoanCost);
+
+    document.getElementById("result").style.display = "block";
+
+    window.scrollTo({
+        top: document.getElementById("result").offsetTop - 100,
+        behavior:"smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
