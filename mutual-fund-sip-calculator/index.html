@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>SIP Calculator - Calculate Mutual Fund Returns Online | Nexus Pro Tools</title>
+
+    <meta name="description"
+        content="Free SIP Calculator to calculate your mutual fund investment returns, wealth gain and future value instantly. Simple and accurate SIP planning tool.">
+
+    <meta name="keywords"
+        content="sip calculator, mutual fund calculator, investment calculator, monthly sip return, sip planner">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/tool-nexus-pro/favicon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Nexus Pro Tools">
+    <meta property="og:title" content="SIP Calculator - Nexus Pro Tools">
+    <meta property="og:description" content="Calculate your SIP returns instantly with our free online SIP Calculator.">
+    <meta property="og:image" content="https://bharat67889.github.io/tool-nexus-pro/favicon.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SIP Calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "brand": {
+        "@type": "Brand",
+        "name": "Nexus Pro Tools"
+      }
+    }
+    </script>
+
+    <!-- Common Header -->
+    <script src="../common/header.js"></script>
+
+    <style>
+
+        :root{
+            --primary:#2563eb;
+            --primary-dark:#1d4ed8;
+            --bg:#f1f5f9;
+            --card:#ffffff;
+            --text:#0f172a;
+            --muted:#64748b;
+            --success:#16a34a;
+        }
+
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:Segoe UI,Tahoma,sans-serif;
+            background:var(--bg);
+            color:var(--text);
+        }
+
+        .container{
+            max-width:950px;
+            margin:auto;
+            padding:25px;
+        }
+
+        .calculator-card{
+            background:var(--card);
+            padding:35px;
+            border-radius:24px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            border:1px solid #e2e8f0;
+        }
+
+        h1{
+            text-align:center;
+            color:var(--primary);
+            margin-bottom:10px;
+            font-size:34px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:var(--muted);
+            margin-bottom:35px;
+            font-size:16px;
+        }
+
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:22px;
+        }
+
+        .field label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:600;
+            color:#334155;
+        }
+
+        .field input{
+            width:100%;
+            padding:14px;
+            border-radius:12px;
+            border:2px solid #cbd5e1;
+            font-size:16px;
+            transition:0.3s;
+        }
+
+        .field input:focus{
+            border-color:var(--primary);
+            outline:none;
+        }
+
+        .btn{
+            width:100%;
+            margin-top:30px;
+            padding:16px;
+            border:none;
+            border-radius:14px;
+            background:var(--primary);
+            color:white;
+            font-size:18px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:var(--primary-dark);
+            transform:translateY(-2px);
+        }
+
+        #result{
+            display:none;
+            margin-top:35px;
+        }
+
+        .result-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+            gap:18px;
+        }
+
+        .result-box{
+            background:#eff6ff;
+            padding:25px;
+            border-radius:18px;
+            text-align:center;
+            border:1px solid #bfdbfe;
+        }
+
+        .result-box span{
+            display:block;
+            color:var(--muted);
+            font-size:14px;
+            margin-bottom:10px;
+        }
+
+        .result-box strong{
+            font-size:24px;
+            color:var(--primary);
+        }
+
+        .content{
+            margin-top:50px;
+            background:white;
+            border-radius:24px;
+            padding:40px;
+            line-height:1.8;
+            box-shadow:0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .content h2{
+            color:var(--primary);
+            margin-top:35px;
+            border-left:5px solid var(--primary);
+            padding-left:14px;
+        }
+
+        .highlight{
+            background:#f8fafc;
+            border-left:5px solid var(--success);
+            padding:20px;
+            border-radius:10px;
+            margin:25px 0;
+        }
+
+        .formula{
+            background:#e2e8f0;
+            padding:18px;
+            border-radius:12px;
+            text-align:center;
+            font-weight:bold;
+            overflow:auto;
+        }
+
+        @media(max-width:600px){
+
+            .calculator-card,
+            .content{
+                padding:22px;
+            }
+
+            h1{
+                font-size:28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="calculator-card">
+
+        <h1>📈 SIP Calculator</h1>
+
+        <p class="subtitle">
+            Calculate your future mutual fund wealth instantly
+        </p>
+
+        <div class="grid">
+
+            <div class="field">
+                <label>Monthly Investment (₹)</label>
+                <input type="number" id="monthly" placeholder="e.g. 5000">
+            </div>
+
+            <div class="field">
+                <label>Expected Return Rate (% yearly)</label>
+                <input type="number" id="rate" step="0.1" placeholder="e.g. 12">
+            </div>
+
+            <div class="field">
+                <label>Investment Duration (Years)</label>
+                <input type="number" id="years" placeholder="e.g. 15">
+            </div>
+
+        </div>
+
+        <button class="btn" onclick="calculateSIP()">
+            Calculate SIP Returns
+        </button>
+
+        <div id="result">
+
+            <div class="result-grid">
+
+                <div class="result-box">
+                    <span>Total Investment</span>
+                    <strong id="invested">₹0</strong>
+                </div>
+
+                <div class="result-box">
+                    <span>Estimated Returns</span>
+                    <strong id="returns">₹0</strong>
+                </div>
+
+                <div class="result-box">
+                    <span>Total Value</span>
+                    <strong id="futureValue">₹0</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="content">
+
+        <h2>What is SIP?</h2>
+
+        <p>
+            SIP (Systematic Investment Plan) is one of the smartest ways to invest money in mutual funds regularly. Instead of investing a huge amount at once, SIP allows you to invest a fixed amount every month.
+        </p>
+
+        <div class="highlight">
+            “Small investments done consistently for long periods can create massive wealth through compounding.”
+        </div>
+
+        <h2>SIP Formula</h2>
+
+        <p>
+            SIP return calculation is based on compound growth.
+        </p>
+
+        <div class="formula">
+            M = P × [ ( (1 + i)^n - 1 ) / i ] × (1+i)
+        </div>
+
+        <p>
+            Here:
+        </p>
+
+        <ul>
+            <li><strong>P</strong> = Monthly Investment</li>
+            <li><strong>i</strong> = Monthly Return Rate</li>
+            <li><strong>n</strong> = Total Number of Months</li>
+        </ul>
+
+        <h2>Why SIP is Powerful?</h2>
+
+        <p>
+            SIP helps in rupee cost averaging and removes emotional investing mistakes. Long-term SIP investments can beat inflation and help in building wealth for goals like retirement, car, house, or financial freedom.
+        </p>
+
+        <h2>Benefits of Using This SIP Calculator</h2>
+
+        <ul>
+            <li>Instant future value calculation</li>
+            <li>Accurate compound growth formula</li>
+            <li>Mobile friendly interface</li>
+            <li>Fast and lightweight tool</li>
+            <li>Free to use anytime</li>
+        </ul>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <p>
+            <strong>Is SIP safe?</strong><br>
+            SIP itself is a method of investing. Safety depends on the mutual fund chosen.
+        </p>
+
+        <p>
+            <strong>Can I stop SIP anytime?</strong><br>
+            Yes, most SIPs can be paused or stopped anytime.
+        </p>
+
+        <p>
+            <strong>What is a good SIP duration?</strong><br>
+            Usually 10+ years gives strong compounding benefits.
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+function calculateSIP(){
+
+    const monthly =
+        parseFloat(document.getElementById("monthly").value);
+
+    const annualRate =
+        parseFloat(document.getElementById("rate").value);
+
+    const years =
+        parseFloat(document.getElementById("years").value);
+
+    if(!monthly || !annualRate || !years){
+
+        alert("Please fill all fields properly.");
+        return;
+    }
+
+    const monthlyRate = annualRate / 12 / 100;
+
+    const months = years * 12;
+
+    const futureValue =
+        monthly *
+        (
+            (
+                Math.pow(1 + monthlyRate, months) - 1
+            ) / monthlyRate
+        ) *
+        (1 + monthlyRate);
+
+    const invested =
+        monthly * months;
+
+    const returns =
+        futureValue - invested;
+
+    document.getElementById("invested").innerText =
+        "₹" + Math.round(invested).toLocaleString('en-IN');
+
+    document.getElementById("returns").innerText =
+        "₹" + Math.round(returns).toLocaleString('en-IN');
+
+    document.getElementById("futureValue").innerText =
+        "₹" + Math.round(futureValue).toLocaleString('en-IN');
+
+    document.getElementById("result").style.display = "block";
+
+    window.scrollTo({
+        top: document.getElementById("result").offsetTop - 100,
+        behavior: 'smooth'
+    });
+
+}
+
+</script>
+
+</body>
+</html>
